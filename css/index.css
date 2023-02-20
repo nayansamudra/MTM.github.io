@@ -45,6 +45,12 @@
   padding: 0 10px;
 }
 
+#BankNifty,#Nifty {
+  width: auto;
+  padding-left: 0 !important; 
+  padding-right: 0 !important; 
+}
+
 @media (max-width:992px) {
   #Table_2_Column{
     display: none;
@@ -77,4 +83,8 @@
   .button:nth-child(1) .row{
     width: auto !important;
   }
+}
+
+.canvasjs-chart-credit{
+  display: none !important;
 }

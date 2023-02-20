@@ -136,23 +136,23 @@ $(document).ready(function () {
         color: 'green',
         dataPoints: [
           { x: new Date(2012, 00, 1), y: 2600 },
-          { x: new Date(2012, 01, 1), y: 3800 },          
-          { x: new Date(2012, 01, 15), y: 0,markerSize: 0, highlightEnabled: false },
+          { x: new Date(2012, 01, 1), y: 3800 },
+          { x: new Date(2012, 01, 15), y: 0, markerSize: 0, highlightEnabled: false },
         ]
       }, {
         type: "splineArea",
         color: 'red',
         dataPoints: [
-          { x: new Date(2012, 01, 16), y: 0,markerSize: 0, highlightEnabled: false },
+          { x: new Date(2012, 01, 16), y: 0, markerSize: 0, highlightEnabled: false },
           { x: new Date(2012, 02, 1), y: -4300 },
           { x: new Date(2012, 03, 1), y: -2900 },
           { x: new Date(2012, 04, 1), y: -4100 },
-          { x: new Date(2012, 04, 15), y: 0,markerSize: 0, highlightEnabled: false },]
+          { x: new Date(2012, 04, 15), y: 0, markerSize: 0, highlightEnabled: false },]
       }, {
         type: "splineArea",
         color: 'green',
         dataPoints: [
-          { x: new Date(2012, 04, 16), y: 0,markerSize: 0, highlightEnabled: false },
+          { x: new Date(2012, 04, 16), y: 0, markerSize: 0, highlightEnabled: false },
           { x: new Date(2012, 05, 1), y: 4500 },
           { x: new Date(2012, 06, 1), y: 8600 },
           { x: new Date(2012, 07, 1), y: 6400 },
@@ -249,22 +249,32 @@ $(document).ready(function () {
   // chart.render();
 
   if (parseFloat($('#Live_MTM').text()) > 0) {
-    console.log('u r inside if')
     $('#Live_MTM').attr('style', 'color:green')
   }
   else if (parseFloat($('#Live_MTM').text()) < 0) {
-    console.log('u r inside else if')
     $('#Live_MTM').attr('style', 'color:red')
   }
 
   if (parseFloat($('#percentage_pnl').text()) > 0) {
-    console.log('u r inside if')
     $('#percentage').attr('style', 'color:green')
   }
   else if (parseFloat($('#percentage_pnl').text()) < 0) {
-    console.log('u r inside else if')
     $('#percentage').attr('style', 'color:red')
   }
+
+  // if (parseFloat($('#BankNifty').text()) > 0) {
+  //   $('#BankNifty').attr('style', 'color:green')
+  // }
+  // else if (parseFloat($('#BankNifty').text()) < 0) {
+  //   $('#BankNifty').attr('style', 'color:red')
+  // }
+
+  // if (parseFloat($('#Nifty').text()) > 0) {
+  //   $('#Nifty').attr('style', 'color:green')
+  // }
+  // else if (parseFloat($('#Nifty').text()) < 0) {
+  //   $('#Nifty').attr('style', 'color:red')
+  // }
 
   $('#popup').click(() => {
     $('#Table_2_Column').show()
@@ -274,7 +284,6 @@ $(document).ready(function () {
     $('#Table_2_Column').hide()
     $('#ChartDatatable_container').show()
   })
-
 
 
   if ($(document).width() < 992) {
