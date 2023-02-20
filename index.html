@@ -18,7 +18,8 @@
     <div class="container" style="position: relative;">
         <div class="row">
             <div class="col-lg-6 mb-5">
-                <div id="chart"></div>
+                <!-- <div id="chart"></div> -->
+                <div id="chartContainer" style="height: 370px; width: 100%;"></div>
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col button">
@@ -27,10 +28,10 @@
                             <div class="row justify-content-center">Nifty</div>
                         </div>
                         <div class="col d-flex align-items-center button">
-                            <div id="Live_MTM">39</div>
+                            live mtm = <div id="Live_MTM">39</div>
                         </div>
-                        <div class="col d-flex align-items-center button" id="percentage">
-                            <div id="percentage_pnl">-43</div>%
+                        <div class="col d-flex align-items-center button">
+                            % pnl = <div class="d-flex" id="percentage"><div id="percentage_pnl">-43</div>%</div>
                         </div>
                     </div>
                 </div>
@@ -101,6 +102,8 @@
         src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
     <!-- Moment js  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
     <script src="js/index.js"></script>
 </body>

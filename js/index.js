@@ -110,69 +110,143 @@ $(document).ready(function () {
   showdata()
   showdata_1()
 
+  Chart_data = []
+
   x_axis = []
   y_axis = []
-  for (var i = 0; i < myArrayone.length; i++) {
-    temp = moment(myArrayone[i][0] * 1000).format('h:mm')
-    x_axis.push(temp)
-    y_axis.push(parseFloat(myArrayone[i][6]))
+
+  // for (var i = 0; i < myArrayone.length; i++) {
+  //   temp = moment(myArrayone[i][0] * 1000).format('h:mm')
+  //   x_axis.push(temp)
+  //   y_axis.push(parseFloat(myArrayone[i][6]))
+  // }
+
+  // conditional area chart - http://jsfiddle.net/canvasjs/b74a99fb/
+  window.onload = function () {
+
+    var chart = new CanvasJS.Chart("chartContainer", {
+      theme: "light2", // "light1", "light2", "dark1", "dark2"
+      animationEnabled: true,
+      zoomEnabled: true,
+      title: {
+        text: "Try Zooming and Panning"
+      },
+      data: [{
+        type: "splineArea",
+        color: 'green',
+        dataPoints: [
+          { x: new Date(2012, 00, 1), y: 2600 },
+          { x: new Date(2012, 01, 1), y: 3800 },          
+          { x: new Date(2012, 01, 15), y: 0,markerSize: 0, highlightEnabled: false },
+        ]
+      }, {
+        type: "splineArea",
+        color: 'red',
+        dataPoints: [
+          { x: new Date(2012, 01, 16), y: 0,markerSize: 0, highlightEnabled: false },
+          { x: new Date(2012, 02, 1), y: -4300 },
+          { x: new Date(2012, 03, 1), y: -2900 },
+          { x: new Date(2012, 04, 1), y: -4100 },
+          { x: new Date(2012, 04, 15), y: 0,markerSize: 0, highlightEnabled: false },]
+      }, {
+        type: "splineArea",
+        color: 'green',
+        dataPoints: [
+          { x: new Date(2012, 04, 16), y: 0,markerSize: 0, highlightEnabled: false },
+          { x: new Date(2012, 05, 1), y: 4500 },
+          { x: new Date(2012, 06, 1), y: 8600 },
+          { x: new Date(2012, 07, 1), y: 6400 },
+          { x: new Date(2012, 08, 1), y: 5300 },
+          { x: new Date(2012, 09, 1), y: 6000 }]
+      }]
+    });
+
+    // addDataPoints();
+    // setColor(chart);
+    chart.render();
+
+    // function setColor(chart) {
+    //   for (var i = 0; i < chart.options.data.length; i++) {
+    //     dataSeries = chart.options.data[i];
+    //     for (var j = 0; j < dataSeries.dataPoints.length; j++) {
+    //       if (dataSeries.dataPoints[j].y <= 0) {
+    //         dataSeries.dataPoints[j].color = 'green';
+    //         dataSeries.color = 'green';
+    //       }
+    //       else{
+    //         dataSeries.dataPoints[j].color = 'red';
+    //         // dataSeries.color = 'red';
+    //       }
+    //     }
+    //   }
+    // }
+
+    // function addDataPoints() {
+    //   var xVal, yVal
+    //   for (var i = 0; i < 8; i++) {
+    //     xVal = moment(myArrayone[i][0] * 1000).format('h:mm')
+    //     yVal = parseFloat(myArrayone[i][6]);
+    //     Chart_data.push({ x: xVal, y: yVal })
+    //     console.log(Chart_data)
+    //   }
+    // }
   }
 
-  var options = {
-    series: [{
-      name: "MTM value",
-      data: y_axis
-    }],
-    chart: {
-      height: 350,
-      type: 'area',
-      zoom: {
-        enabled: false
-      },
-      toolbar: {
-        show: false
-      }
-    },
-    dataLabels: {
-      enabled: false
-    },
-    stroke: {
-      curve: 'straight'
-    },
-    title: {
-      text: 'Live MTM Chart',
-      align: 'center'
-    },
-    grid: {
-      row: {
-        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-        opacity: 0.5
-      },
-    },
-    xaxis: {
-      categories: x_axis,
-    },
-    fill: {
-      colors: [function ({ value, seriesIndex, w }) {
-        if (value < 0) {
-          console.log(value)
-          return 'red'
-        } else {
-          return 'green'
-        }
-      }]
-    },
-    colors: [function ({ value, seriesIndex, w }) {
-      if (value < 0) {
-        return 'red'
-      } else {
-        return 'green'
-      }
-    }]
-  };
+  // var options = {
+  //   series: [{
+  //     name: "MTM value",
+  //     data: y_axis
+  //   }],
+  //   chart: {
+  //     height: 350,
+  //     type: 'area',
+  //     zoom: {
+  //       enabled: false
+  //     },
+  //     toolbar: {
+  //       show: false
+  //     }
+  //   },
+  //   dataLabels: {
+  //     enabled: false
+  //   },
+  //   stroke: {
+  //     curve: 'straight'
+  //   },
+  //   title: {
+  //     text: 'Live MTM Chart',
+  //     align: 'center'
+  //   },
+  //   grid: {
+  //     row: {
+  //       colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+  //       opacity: 0.5
+  //     },
+  //   },
+  //   xaxis: {
+  //     categories: x_axis,
+  //   },
+  //   fill: {
+  //     colors: [function ({ value, seriesIndex, w }) {
+  //       if (value < 0) {
+  //         console.log(value)
+  //         return 'red'
+  //       } else {
+  //         return 'green'
+  //       }
+  //     }]
+  //   },
+  //   colors: [function ({ value, seriesIndex, w }) {
+  //     if (value < 0) {
+  //       return 'red'
+  //     } else {
+  //       return 'green'
+  //     }
+  //   }]
+  // };
 
-  var chart = new ApexCharts(document.querySelector("#chart"), options);
-  chart.render();
+  // var chart = new ApexCharts(document.querySelector("#chart"), options);
+  // chart.render();
 
   if (parseFloat($('#Live_MTM').text()) > 0) {
     console.log('u r inside if')

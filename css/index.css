@@ -56,3 +56,25 @@
     display: block !important;
   }
 }
+@media (max-width:500px) {
+  .button{
+    margin-left: 2px !important;
+    margin-right: 2px !important;
+    width: fit-content !important;
+    font-size:small !important;
+  }
+  .button:nth-child(2){
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }  
+  .button:nth-child(3){
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .button:nth-child(1){
+    width: auto !important;
+  }
+  .button:nth-child(1) .row{
+    width: auto !important;
+  }
+}
