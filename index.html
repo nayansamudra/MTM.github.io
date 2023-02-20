@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>MTM Chart</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
+</head>
+
+<body style="position: relative;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-5">
+                <div id="chart"></div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col button">
+                            <div class="row justify-content-center" style="border-bottom: 2px solid black;">BankNifty
+                            </div>
+                            <div class="row justify-content-center">Nifty</div>
+                        </div>
+                        <div class="col d-flex align-items-center button">
+                            <div>Live MTM</div>
+                        </div>
+                        <div class="col d-flex align-items-center button">
+                            <div>% pnl</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contaniner" style="overflow-x: scroll;">
+                    <div class="row">
+                        <div id="ChartDatatable">
+                            <table id="ChartDatatable_1" class="row-border">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Date</th>
+                                        <th class="text-center">FII Buy</th>
+                                        <th class="text-center">FII Sell</th>
+                                        <th class="text-center">FII Net</th>
+                                        <th class="text-center">In Market</th>
+                                        <th class="text-center">DII Net</th>
+                                        <th class="text-center">DII Buy</th>
+                                        <th class="text-center">DII Sell</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="FII/DII_Data"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="container" id="popup">
+                    <div class="row justify-content-center">◯</div>
+                </div>
+                <div class="container" id="menu">
+                    <div class="row justify-content-center">◯</div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="contaniner" style="overflow-x: auto;">
+                    <div class="row">
+                        <div id="MTMDatatable">
+                            <table id="MTMDatatable_1" class="row-border">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">BN</th>
+                                        <th class="text-center">Strike</th>
+                                        <th class="text-center">Op</th>
+                                        <th class="text-center">Ltp</th>
+                                        <th class="text-center">Net Q.</th>
+                                        <th class="text-center">Avg.</th>
+                                        <th class="text-center">MTM</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="MTM_Data"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+
+    <!-- Apexchart  -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- Datatables -->
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
+    <!-- Moment js  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+    <script src="js/index.js"></script>
+</body>
+
+</html>

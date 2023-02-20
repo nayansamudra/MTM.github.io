@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+.button{
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: 10px;
+  text-align: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#popup{
+  position: absolute;
+  z-index: 1;
+  bottom: 0% !important;
+  border-radius: 5px;
+  background-color: black;
+  color:white;
+  width: max-content;
+  text-align:center;
+  padding-bottom:5px !important;
+  display: none !important;
+}
+#popup div{
+  font-size: xx-large;
+  padding: 0 10px;
+}
+
+#menu{
+  position: absolute;
+  z-index: 1;
+  right: 0% !important;
+  bottom: 2% !important;
+  border-radius: 5px;
+  background-color: black;
+  color:white;
+  width: max-content;
+  text-align: center;
+  padding-bottom:5px !important;
+  display: none !important;
+}
+#menu div{
+  font-size: xx-large;
+  padding: 0 10px;
+}
+
+@media (max-width:992px) {
+  #MTMDatatable{
+    display: none;
+  }
+  #popup{
+    display: block !important;
+  }
+  #menu{
+    display: block !important;
+  }
+}
