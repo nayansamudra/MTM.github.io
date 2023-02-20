@@ -46,7 +46,7 @@
 }
 
 @media (max-width:992px) {
-  #MTMDatatable{
+  #Table_2_Column{
     display: none;
   }
   #popup{

@@ -71,8 +71,16 @@ fetch_data_1 = () => {
       }
       $("#MTMDatatable_1").DataTable({
         "columnDefs": [{ targets: [0, 1, 2, 3, 4, 5, 6], className: 'dt-body-center' },
-        // { targets: [4], className: 'dt-body-center' }
-      ],
+          // { targets: [4], className: 'dt-body-center' }
+        ],
+        "rowCallback": function (row, data) {
+          if (data[6] > 0) {
+            $('td:eq(6)', row).html('<span style=color:green>' + data[6] + '</span>');
+          }
+          else {
+            $('td:eq(6)', row).html('<span style=color:red>' + data[6] + '</span>');
+          }
+        },
         "autoWidth": false,
         paging: false,
         info: false,
@@ -86,14 +94,38 @@ fetch_data_1 = () => {
 
 $(document).ready(function () {
   $.ajaxSetup({ async: false }); // to stop async
+
+  callcount_for_FII_DII_Data = callcount_for_MTM_Data = 0;
+  counter = counter_1 = -1
+  myArrayone = [[0, 0], [0, 0]]
+  if (counter >= 40) {
+    counter = -1
+    console.log(counter)
+  }
+  if (counter_1 >= 40) {
+    counter_1 = -1
+    console.log(counter_1)
+  }
+
+  showdata()
+  showdata_1()
+
+  x_axis = []
+  y_axis = []
+  for (var i = 0; i < myArrayone.length; i++) {
+    temp = moment(myArrayone[i][0] * 1000).format('h:mm')
+    x_axis.push(temp)
+    y_axis.push(parseFloat(myArrayone[i][6]))
+  }
+
   var options = {
     series: [{
-      name: "Desktops",
-      data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+      name: "MTM value",
+      data: y_axis
     }],
     chart: {
       height: 350,
-      type: 'line',
+      type: 'area',
       zoom: {
         enabled: false
       },
@@ -118,36 +150,58 @@ $(document).ready(function () {
       },
     },
     xaxis: {
-      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-    }
+      categories: x_axis,
+    },
+    fill: {
+      colors: [function ({ value, seriesIndex, w }) {
+        if (value < 0) {
+          console.log(value)
+          return 'red'
+        } else {
+          return 'green'
+        }
+      }]
+    },
+    colors: [function ({ value, seriesIndex, w }) {
+      if (value < 0) {
+        return 'red'
+      } else {
+        return 'green'
+      }
+    }]
   };
 
   var chart = new ApexCharts(document.querySelector("#chart"), options);
   chart.render();
 
-  callcount_for_FII_DII_Data = callcount_for_MTM_Data = 0;
-  counter = counter_1 = -1
-  myArrayone = [[0, 0], [0, 0]]
-  if (counter >= 40) {
-    counter = -1
-    console.log(counter)
+  if (parseFloat($('#Live_MTM').text()) > 0) {
+    console.log('u r inside if')
+    $('#Live_MTM').attr('style', 'color:green')
   }
-  if (counter_1 >= 40) {
-    counter_1 = -1
-    console.log(counter_1)
+  else if (parseFloat($('#Live_MTM').text()) < 0) {
+    console.log('u r inside else if')
+    $('#Live_MTM').attr('style', 'color:red')
   }
 
-  showdata()
-  showdata_1()
+  if (parseFloat($('#percentage_pnl').text()) > 0) {
+    console.log('u r inside if')
+    $('#percentage').attr('style', 'color:green')
+  }
+  else if (parseFloat($('#percentage_pnl').text()) < 0) {
+    console.log('u r inside else if')
+    $('#percentage').attr('style', 'color:red')
+  }
 
-  $('#popup').click(()=>{
-    $('#MTMDatatable').show()
-    $('#ChartDatatable').hide()
+  $('#popup').click(() => {
+    $('#Table_2_Column').show()
+    $('#ChartDatatable_container').hide()
   })
-  $('#menu').click(()=>{
-    $('#MTMDatatable').hide()
-    $('#ChartDatatable').show()
+  $('#menu').click(() => {
+    $('#Table_2_Column').hide()
+    $('#ChartDatatable_container').show()
   })
+
+
 
   if ($(document).width() < 992) {
     counter_for_datatable = 0

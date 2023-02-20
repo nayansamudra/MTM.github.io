@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
 </head>
 
-<body style="position: relative;">
-    <div class="container">
+<body>
+    <div class="container" style="position: relative;">
         <div class="row">
             <div class="col-lg-6 mb-5">
                 <div id="chart"></div>
@@ -27,14 +27,14 @@
                             <div class="row justify-content-center">Nifty</div>
                         </div>
                         <div class="col d-flex align-items-center button">
-                            <div>Live MTM</div>
+                            <div id="Live_MTM">39</div>
                         </div>
-                        <div class="col d-flex align-items-center button">
-                            <div>% pnl</div>
+                        <div class="col d-flex align-items-center button" id="percentage">
+                            <div id="percentage_pnl">-43</div>%
                         </div>
                     </div>
                 </div>
-                <div class="contaniner" style="overflow-x: scroll;">
+                <div class="contaniner" style="overflow: auto; height: 50vh" id="ChartDatatable_container">
                     <div class="row">
                         <div id="ChartDatatable">
                             <table id="ChartDatatable_1" class="row-border">
@@ -62,8 +62,8 @@
                     <div class="row justify-content-center">◯</div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="contaniner" style="overflow-x: auto;">
+            <div class="col-lg-6" id="Table_2_Column">
+                <div class="contaniner" style="overflow: auto;height: 100vh;">
                     <div class="row">
                         <div id="MTMDatatable">
                             <table id="MTMDatatable_1" class="row-border">
