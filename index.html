@@ -30,7 +30,7 @@
     <div class="container" style="position: relative;">
         <div class="row">
             <div class="col-lg-6 mb-5">
-                <!-- <canvas id="myChart"></canvas> -->
+                <div id="chart"></div>
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-auto button">
@@ -80,8 +80,9 @@
                     <div class="row" id="log_update" style="display: none">
                         select Strategy: &nbsp;&nbsp;
                         <div class="col-auto bg-color rounded text-light p-0">
-                            <select class="px-0 bg-faint rounded" id="log_update_option" onmousedown="if(this.options.length>10){this.size=10;}" onchange='this.size=0;' onblur="this.size=0;">
-                                
+                            <!-- <select class="px-0 bg-faint rounded" id="log_update_option" onmousedown="if(this.options.length>10){this.size=10;}" onchange='this.size=0;' onblur="this.size=0;"> -->
+                            <select class="px-0 bg-faint rounded" id="log_update_option">
+
                             </select>
                         </div>
                         <div id="logDatatable" style="display:block;height: 50vh !important;overflow-y: auto;">
@@ -141,9 +142,13 @@
         defer></script>
     <!-- Moment js  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" defer></script>
+    <!-- Highchart -->
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/modules/pattern-fill.js"></script>
     <!-- Chart JS -->
     <!-- <script src="js/chart.min.js" defer></script> -->
-
     <!-- Local Javascript-->
     <script src="js/index.js" defer></script>
     <!-- <script src="js/chart.js" defer></script> -->
