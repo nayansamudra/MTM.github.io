@@ -87,7 +87,8 @@ $(document).ready(function () {
 
   $.ajaxSetup({ async: false }); // to stop async
 
-  root = 'http://localhost/mtm_chart/response.txt'
+//   root = 'http://localhost/mtm_chart/response.txt'
+  root = 'https://nayansamudra.github.io/MTM.github.io/response.txt'
 
   $.get(root, function (data, status) {
     API_data = JSON.parse(data)
