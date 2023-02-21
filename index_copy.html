@@ -13,24 +13,36 @@
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
 
+    <!-- Highchart -->
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/modules/pattern-fill.js"></script>
+
+    <style>
+        .highcharts-xaxis-grid,
+        .highcharts-credits {
+            display: none !important;
+        }
+
+        .highcharts-point-down {
+            fill: rgb(255, 108, 108) !important;
+            stroke: rgb(255, 108, 108) !important;
+        }
+
+        .highcharts-point-up {
+            fill: rgb(66, 177, 66) !important;
+            stroke: rgb(66, 177, 66) !important;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="pe-5 pt-5" style="width: 100%;" id="Top_Bar">
-        <div class="row justify-content-end mx-2 mb-5">
-            <div class="col-auto bg-color rounded text-light p-0">
-                <select class="px-0 bg-faint rounded" id="Account_option">
-                    <option id="1st_dropdown_value" value="Account_no_1">Account 1</option>
-                    <option id="2nd_dropdown_value" value="Account_no_2">Account 2</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
     <div class="container" style="position: relative;">
         <div class="row">
             <div class="col-lg-6 mb-5">
-                <!-- <canvas id="myChart"></canvas> -->
+                <div id="chart"></div>
+                <!-- <div id="chartContainer" style="height: 370px; width: 100%;"></div> -->
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-auto button">
@@ -54,45 +66,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="contaniner" style="height: 50vh" id="ChartDatatable_container">
-                    <div class="row justify-content-end mx-2 my-5">
-                        <div class="col-auto bg-color rounded text-light p-0">
-                            <select class="px-0 bg-faint rounded" id="update_option">
-                                <option id="1st_dropdown_value" value="Order_Update">Order Update</option>
-                                <option id="2nd_dropdown_value" value="Log_Update">Log Update</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row" id="order_update" style="display: block;">
-                        <div id="ChartDatatable" style="display:block;height: 50vh !important;overflow-y: auto;">
-                            <table id="ChartDatatable_1" class="row-border" style="font-size:14px">
+                <div class="contaniner" style="overflow: auto; height: 50vh" id="ChartDatatable_container">
+                    <div class="row">
+                        <div id="ChartDatatable">
+                            <table id="ChartDatatable_1" class="row-border">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">Strategy Name</th>
-                                        <th class="text-center">Strategy Time</th>
-                                        <th class="text-center">Description</th>
+                                        <th class="text-center">Date</th>
+                                        <th class="text-center">FII Buy</th>
+                                        <th class="text-center">FII Sell</th>
+                                        <th class="text-center">FII Net</th>
+                                        <th class="text-center">In Market</th>
+                                        <th class="text-center">DII Net</th>
+                                        <th class="text-center">DII Buy</th>
+                                        <th class="text-center">DII Sell</th>
                                     </tr>
                                 </thead>
-                                <tbody id="order_updates_Data"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row" id="log_update" style="display: none">
-                        select Strategy: &nbsp;&nbsp;
-                        <div class="col-auto bg-color rounded text-light p-0">
-                            <select class="px-0 bg-faint rounded" id="log_update_option" onmousedown="if(this.options.length>10){this.size=10;}" onchange='this.size=0;' onblur="this.size=0;">
-                                
-                            </select>
-                        </div>
-                        <div id="logDatatable" style="display:block;height: 50vh !important;overflow-y: auto;">
-                            <table id="logDatatable_1" class="row-border" style="font-size:14px">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">Strategy Time</th>
-                                        <th class="text-center">Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="log_updates_Data"></tbody>
+                                <tbody id="FII/DII_Data"></tbody>
                             </table>
                         </div>
                     </div>
@@ -105,7 +95,7 @@
                 </div>
             </div>
             <div class="col-lg-6" id="Table_2_Column">
-                <div class="contaniner" style="height: 100vh;">
+                <div class="contaniner" style="overflow: auto;height: 100vh;">
                     <div class="row">
                         <div id="Righttable">
                             <table id="Righttable_all_position" class="row-border">
@@ -136,17 +126,17 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
 
+    <!-- Apexchart  -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <!-- Datatables -->
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"
-        defer></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
     <!-- Moment js  -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" defer></script>
-    <!-- Chart JS -->
-    <!-- <script src="js/chart.min.js" defer></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
-    <!-- Local Javascript-->
-    <script src="js/index.js" defer></script>
-    <!-- <script src="js/chart.js" defer></script> -->
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    <script src="js/index copy.js"></script>
 </body>
 
 </html>

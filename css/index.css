@@ -1,9 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
+select>option{ 
+  height:20px;
+}
+
+
 .button{
   border: 2px solid black;
   border-radius: 5px;
-  margin: 10px;
+  margin: 2px;
   text-align: center;
   justify-content: center;
   font-weight: bold;
@@ -51,6 +56,11 @@
   padding-right: 0 !important; 
 }
 
+@media (max-width:1200px) {
+  .button{
+    font-size: 14px !important;
+  }
+}
 @media (max-width:992px) {
   #Table_2_Column{
     display: none;
@@ -61,13 +71,16 @@
   #menu{
     display: block !important;
   }
+  .button{
+    font-size: 16px !important;
+  }
 }
 @media (max-width:500px) {
   .button{
     margin-left: 2px !important;
     margin-right: 2px !important;
     width: fit-content !important;
-    font-size:small !important;
+    font-size: 12px !important;
   }
   .button:nth-child(2){
     padding-left: 0 !important;
