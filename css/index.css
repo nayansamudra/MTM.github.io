@@ -63,9 +63,33 @@ select>option{
     font-size: 14px !important;
   }
 }
+@media (min-width:992px) {
+  #Table_2_Column{
+    display: block;
+  }
+  #Table_1_Column{
+    display: block;
+  }
+  #popup{
+    display: none !important;
+  }
+  #menu{
+    display: none !important;
+  }
+}
 @media (max-width:992px) {
   #Table_2_Column{
     display: none;
+    height: fit-content !important;
+  }
+  #Table_2_Column .contaniner{
+    height: fit-content !important;
+  }
+  #Righttable{
+    padding-bottom: 15px !important;
+  }
+  #Table_1_Column{
+    display: block;
   }
   #popup{
     display: block !important;
@@ -99,7 +123,16 @@ select>option{
     width: auto !important;
   }
 }
-
 .canvasjs-chart-credit{
   display: none !important;
+}
+
+@media (max-width:550px) {
+  th, td{
+    padding-left: 0 !important;
+    padding-right: 16px !important;
+  }
+  th{
+    font-size: 12px !important;
+  }
 }
