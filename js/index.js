@@ -167,7 +167,7 @@ $(document).ready(function () {
         data: y_axis,
         tension: 0.4,
         borderWidth: 0,
-        // pointRadius: 0
+        pointRadius: 0
       }]
     },
     options: {
@@ -178,7 +178,7 @@ $(document).ready(function () {
       },
       plugins: {
         tooltip: {
-          enabled: true,
+          enabled: false,
         }
       }
     }
