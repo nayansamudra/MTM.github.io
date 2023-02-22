@@ -47,9 +47,9 @@ order_update_left_table = (param) => {
     for (var j = 0; j < len.length; j++) {
       for (var i = 0; i < order_update[len[j]].length; i++) {
         var text = order_update[len[j]][i][1]
-        console.log(text)
+        // console.log(text)
         text = text.replace(/\n/g, '&nbsp;&nbsp;&nbsp;&nbsp;')
-        console.log(text)
+        // console.log(text)
         var row = `<tr>
           <td>${len[j]}</td>
           <td>${moment(order_update[len[j]][i][0] * 1000).format('h:mm:ss')}</td>
@@ -73,15 +73,15 @@ order_update_left_table = (param) => {
   }
   else {
     order_updates = API_data['order_updates'][param]
-    console.log(order_updates)
+    // console.log(order_updates)
 
     var table1 = document.getElementById('order_updates_Data')
     $('#order_updates_Data').empty()
     for (var j = 0; j < order_updates.length; j++) {
       var text = order_updates[j][1]
-      console.log(text)
+      // console.log(text)
       text = text.replace(/\n/g, '&nbsp;&nbsp;&nbsp;&nbsp;')
-      console.log(text)
+      // console.log(text)
       var row = `<tr>
             <td>${param}</td>
             <td>${moment(order_updates[j][0] * 1000).format('h:mm:ss')}</td>
@@ -101,10 +101,10 @@ log_update_left_table = (param) => {
     for (var j = 0; j < len.length; j++) {
       for (var i = 0; i < log_update[len[j]].length; i++) {
         var text = log_update[len[j]][i][1]
-        console.log(text)
+        // console.log(text)
         text = text.substr(13, text.length)
         text = text.replace(/\n/g, '&nbsp;&nbsp;&nbsp;&nbsp;')
-        console.log(text)
+        // console.log(text)
         var row = `<tr>
           <td>${len[j]}</td>
           <td>${moment(log_update[len[j]][i][0] * 1000).format('h:mm:ss')}</td>
@@ -128,16 +128,16 @@ log_update_left_table = (param) => {
   }
   else {
     log_updates = API_data['log_update'][param]
-    console.log(log_updates)
+    // console.log(log_updates)
 
     var table1 = document.getElementById('log_updates_Data')
     $('#log_updates_Data').empty()
     for (var j = 0; j < log_updates.length; j++) {
       var text = log_updates[j][1]
-      console.log(text)
+      // console.log(text)
       text = text.substr(13, text.length)
       text = text.replace(/\n/g, '&nbsp;&nbsp;&nbsp;&nbsp;')
-      console.log(text)
+      // console.log(text)
       var row = `<tr>
           <td>${param}</td>
           <td>${moment(log_updates[j][0] * 1000).format('h:mm:ss')}</td>
@@ -154,15 +154,15 @@ $(document).ready(function () {
 
   $('#Account_option').change(() => {
     let Account_option = $('#Account_option').val()
-    console.log(Account_option)
+    // console.log(Account_option)
     if (Account_option == 'Account_no_1') {
       root = 'http://localhost/mtm_chart/response.txt'
 
       $.get(root, function (data, status) {
         API_data = JSON.parse(data)
-        console.log(API_data)
+        // console.log(API_data)
       }).fail(function (response) {
-        console.log('Error: ' + response);
+        // console.log('Error: ' + response);
       })
 
       counter_for_all_position_datatable = 0
@@ -211,7 +211,9 @@ $(document).ready(function () {
 
       function addData_1(chart) {
         chart.data.labels = x_axis;
-        chart.data.datasets.data = y_axis
+        chart.data.datasets.forEach((dataset) => {
+          dataset.data = y_axis;
+        })
         chart.update();
       }
 
@@ -236,9 +238,9 @@ $(document).ready(function () {
 
       $.get(root, function (data, status) {
         API_data = JSON.parse(data)
-        console.log(API_data)
+        // console.log(API_data)
       }).fail(function (response) {
-        console.log('Error: ' + response);
+        // console.log('Error: ' + response);
       })
 
       counter_for_all_position_datatable = 0
@@ -287,7 +289,9 @@ $(document).ready(function () {
 
       function addData_2(chart) {
         chart.data.labels = x_axis;
-        chart.data.datasets.data = y_axis
+        chart.data.datasets.forEach((dataset) => {
+          dataset.data = y_axis;
+        })
         chart.update();
       }
 
@@ -315,9 +319,9 @@ $(document).ready(function () {
 
   $.get(root, function (data, status) {
     API_data = JSON.parse(data)
-    console.log(API_data)
+    // console.log(API_data)
   }).fail(function (response) {
-    console.log('Error: ' + response);
+    // console.log('Error: ' + response);
   })
 
   counter_for_log_update_dropdown = counter_for_order_update_dropdown = 0
@@ -365,12 +369,12 @@ $(document).ready(function () {
 
   $('#log_update_option').change(() => {
     let log_update_option = $('#log_update_option').val()
-    console.log(log_update_option)
+    // console.log(log_update_option)
     log_update_left_table(log_update_option)
   })
   $('#order_update_option').change(() => {
     let order_update_option = $('#order_update_option').val()
-    console.log(order_update_option)
+    // console.log(order_update_option)
     order_update_left_table(order_update_option)
   })
 
@@ -455,12 +459,12 @@ $(document).ready(function () {
 
   $('#switch').click(() => {
     if ($('#flexSwitchCheckChecked').is(":checked")) {
-      console.log('enable')
+      // console.log('enable')
       $('#Table_2_Column').show()
       $('#ChartDatatable_container').hide()
     }
     else {
-      console.log('disable')
+      // console.log('disable')
       $('#Table_2_Column').hide()
       $('#ChartDatatable_container').show()
     }
@@ -491,15 +495,15 @@ $(document).ready(function () {
 
   setInterval(() => {
     let Account_option = $('#Account_option').val()
-    console.log(Account_option)
+    // console.log(Account_option)
     if (Account_option == 'Account_no_1') {
       root = 'http://localhost/mtm_chart/response.txt'
 
       $.get(root, function (data, status) {
         API_data = JSON.parse(data)
-        console.log(API_data)
+        // console.log(API_data)
       }).fail(function (response) {
-        console.log('Error: ' + response);
+        // console.log('Error: ' + response);
       })
 
       counter_for_all_position_datatable = 0
@@ -545,15 +549,6 @@ $(document).ready(function () {
       $('#Nifty').text(API_data['nifty50'])
       $('#percentage_pnl').text(API_data['percentage_change'])
       $('#Live_MTM').text(live_mtm)
-
-      function addData(chart) {
-        chart.data.labels = x_axis;
-        chart.data.datasets.data = y_axis
-        chart.update();
-      }
-
-      addData(chart_1)
-
 
       if (parseFloat($('#Live_MTM').text()) > 0) {
         $('#Live_MTM').attr('style', 'color:green')
@@ -574,9 +569,9 @@ $(document).ready(function () {
 
       $.get(root, function (data, status) {
         API_data = JSON.parse(data)
-        console.log(API_data)
+        // console.log(API_data)
       }).fail(function (response) {
-        console.log('Error: ' + response);
+        // console.log('Error: ' + response);
       })
 
       counter_for_all_position_datatable = 0
@@ -623,14 +618,6 @@ $(document).ready(function () {
       $('#percentage_pnl').text(API_data['percentage_change'])
       $('#Live_MTM').text(live_mtm)
 
-      function addData_4(chart) {
-        chart.data.labels = x_axis;
-        chart.data.datasets.data = y_axis
-        chart.update();
-      }
-
-      addData_4(chart_1)
-
       if (parseFloat($('#Live_MTM').text()) > 0) {
         $('#Live_MTM').attr('style', 'color:green')
       }
@@ -644,6 +631,69 @@ $(document).ready(function () {
       else if (parseFloat($('#percentage_pnl').text()) < 0) {
         $('#percentage').attr('style', 'color:red')
       }
+    }
+  }, 1000);
+
+  setInterval(() => {
+    let Account_option = $('#Account_option').val()
+    // console.log(Account_option)
+    if (Account_option == 'Account_no_1') {
+      root = 'http://localhost/mtm_chart/response.txt'
+
+      $.get(root, function (data, status) {
+        API_data = JSON.parse(data)
+        // console.log(API_data)
+      }).fail(function (response) {
+        // console.log('Error: ' + response);
+      })
+
+      x_axis = []
+      y_axis = []
+
+      for (var i = 0; i < API_data['live_pnl'].length; i++) {
+        x_axis.push(moment.unix(Object.keys(API_data['live_pnl'][i])[0]).format('h:mm'))
+        y_axis.push(Object.values(API_data['live_pnl'][i])[0])
+        live_mtm = Object.values(API_data['live_pnl'][i])[0]
+      }
+
+      function addData(chart) {
+        chart.data.labels = x_axis;
+        chart.data.datasets.forEach((dataset) => {
+          dataset.data = y_axis;
+        })
+        chart.update();
+      }
+
+      addData(chart_1)
+    }
+    else if (Account_option == 'Account_no_2') {
+      root = 'http://localhost/mtm_chart/response_1.txt'
+
+      $.get(root, function (data, status) {
+        API_data = JSON.parse(data)
+        // console.log(API_data)
+      }).fail(function (response) {
+        // console.log('Error: ' + response);
+      })
+
+      x_axis = []
+      y_axis = []
+
+      for (var i = 0; i < API_data['live_pnl'].length; i++) {
+        x_axis.push(moment.unix(Object.keys(API_data['live_pnl'][i])[0]).format('h:mm'))
+        y_axis.push(Object.values(API_data['live_pnl'][i])[0])
+        live_mtm = Object.values(API_data['live_pnl'][i])[0]
+      }
+
+      function addData_4(chart) {
+        chart.data.labels = x_axis;
+        chart.data.datasets.forEach((dataset) => {
+          dataset.data = y_axis;
+        })
+        chart.update();
+      }
+
+      addData_4(chart_1)
     }
   }, 10000);
 })
