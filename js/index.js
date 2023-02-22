@@ -95,7 +95,7 @@ $(document).ready(function () {
 
   $.ajaxSetup({ async: false }); // to stop async
 
-  root = 'https://nayansamudra.github.io/MTM.github.io/response.txt'
+  root = 'http://localhost/mtm_chart/response.txt'
 
   $.get(root, function (data, status) {
     API_data = JSON.parse(data)
@@ -109,7 +109,6 @@ $(document).ready(function () {
 
   counter_for_log_update_dropdown = 0
   counter_for_log_update_datatable = 0
-  volume_1 = []
 
   $('#update_option').change(() => {
     let update_val = $('#update_option').val()
@@ -132,94 +131,58 @@ $(document).ready(function () {
     }
   })
 
-  for (var i = 0; i < API_data['live_pnl'].length; i++) {
-    volume_1.push({
-      x: parseFloat(Object.keys(API_data['live_pnl'][i])[0]), // the date
-      y: parseFloat(Object.values(API_data['live_pnl'][i])[0]), // the Volume
-      color: VolumeBarColor(parseFloat(Object.values(API_data['live_pnl'][i])[0])),
-    });
-    live_mtm = parseFloat(Object.values(API_data['live_pnl'][i])[0])
-  }
-
-  highchart = Highcharts.stockChart("chart", {
-    rangeSelector: {
-      enabled: false,
-    },
-    navigator: {
-      enabled: false,
-    },
-    scrollbar: {
-      enabled: false,
-    },
-    legend: {
-      itemStyle: {
-        color: "#000000",
-        fontWeight: "bold",
-      },
-    },
-    chart: {
-      backgroundColor: "#fff",
-    },
-    plotOptions: {
-      column: {
-        horizontal: false,
-        columnWidth: '100%',
-      }
-    },
-    toolbar: {
-      enabled: false,
-    },
-    yAxis:
-    {
-      labels: {
-        formatter: function () {
-          return "";
-        },
-      },
-      top: "5%",
-      height: "100%",
-      offset: 0,
-      lineWidth: 0,
-      gridLineWidth: 0,
-    },
-    tooltip: {
-      split: true,
-      formatter: function () {
-        tooltipArray = ''
-        return tooltipArray;
-      },
-    },
-    xAxis: {
-      type: "datetime",
-      labels: {
-        formatter: function () {
-          return moment.unix(this.value).format("h:mm a");
-        },
-      },
-    },
-    series: [
-      {
-        type: "column",
-        name: "Volume",
-        data: volume_1,
-        yAxis: 0,
-        dataGrouping: {
-          enabled: false,
-        },
-      },
-    ]
-  });
-
   $('#log_update_option').change(() => {
     let log_update_option = $('#log_update_option').val()
     console.log(log_update_option)
     log_update_left_table(log_update_option)
   })
 
+  x_axis = []
+  y_axis = []
+
+  for (var i = 0; i < API_data['live_pnl'].length; i++) {
+    x_axis.push(moment.unix(Object.keys(API_data['live_pnl'][i])[0]).format('h:mm'))
+    y_axis.push(Object.values(API_data['live_pnl'][i])[0])
+    live_mtm = Object.values(API_data['live_pnl'][i])[0]
+  }
+
   $('#BankNifty').text(API_data['bank_nifty'])
   $('#Nifty').text(API_data['nifty50'])
   $('#percentage_pnl').text(API_data['percentage_change'])
   $('#Live_MTM').text(live_mtm)
+
+  const ctx = document.getElementById('chart');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: x_axis,
+      datasets: [{
+        fill: {
+          target: 'origin',
+          above: 'green',   // Area will be red above the origin
+          below: 'red'    // And blue below the origin
+        },
+        label: 'Live MTM chart',
+        data: y_axis,
+        tension: 0.4,
+        borderWidth: 0,
+        // pointRadius: 0
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+      plugins: {
+        tooltip: {
+          enabled: true,
+        }
+      }
+    }
+  });
 
   if (parseFloat($('#Live_MTM').text()) > 0) {
     $('#Live_MTM').attr('style', 'color:green')
