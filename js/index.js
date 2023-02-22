@@ -156,7 +156,7 @@ $(document).ready(function () {
     let Account_option = $('#Account_option').val()
     // console.log(Account_option)
     if (Account_option == 'Account_no_1') {
-      root = 'http://localhost/mtm_chart/response.txt'
+      root = 'https://nayansamudra.github.io/MTM.github.io/response.txt'
 
       $.get(root, function (data, status) {
         API_data = JSON.parse(data)
@@ -234,7 +234,7 @@ $(document).ready(function () {
       }
     }
     else if (Account_option == 'Account_no_2') {
-      root = 'http://localhost/mtm_chart/response_1.txt'
+      root = 'https://nayansamudra.github.io/MTM.github.io/response_1.txt'
 
       $.get(root, function (data, status) {
         API_data = JSON.parse(data)
@@ -313,7 +313,7 @@ $(document).ready(function () {
     }
   })
 
-  root = 'http://localhost/mtm_chart/response.txt'
+  root = 'https://nayansamudra.github.io/MTM.github.io/response.txt'
   // route_1 = '/fetch1'
   // route_2 = '/fetch2'
 
@@ -497,7 +497,7 @@ $(document).ready(function () {
     let Account_option = $('#Account_option').val()
     // console.log(Account_option)
     if (Account_option == 'Account_no_1') {
-      root = 'http://localhost/mtm_chart/response.txt'
+      root = 'https://nayansamudra.github.io/MTM.github.io/response.txt'
 
       $.get(root, function (data, status) {
         API_data = JSON.parse(data)
@@ -565,7 +565,7 @@ $(document).ready(function () {
       }
     }
     else if (Account_option == 'Account_no_2') {
-      root = 'http://localhost/mtm_chart/response_1.txt'
+      root = 'https://nayansamudra.github.io/MTM.github.io/response_1.txt'
 
       $.get(root, function (data, status) {
         API_data = JSON.parse(data)
@@ -638,7 +638,7 @@ $(document).ready(function () {
     let Account_option = $('#Account_option').val()
     // console.log(Account_option)
     if (Account_option == 'Account_no_1') {
-      root = 'http://localhost/mtm_chart/response.txt'
+      root = 'https://nayansamudra.github.io/MTM.github.io/response.txt'
 
       $.get(root, function (data, status) {
         API_data = JSON.parse(data)
@@ -667,7 +667,7 @@ $(document).ready(function () {
       addData(chart_1)
     }
     else if (Account_option == 'Account_no_2') {
-      root = 'http://localhost/mtm_chart/response_1.txt'
+      root = 'https://nayansamudra.github.io/MTM.github.io/response_1.txt'
 
       $.get(root, function (data, status) {
         API_data = JSON.parse(data)
