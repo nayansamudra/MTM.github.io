@@ -1,10 +1,10 @@
 all_position_right_table = () => {
-  position_table =[]
+  position_table = []
   all_position = API_data['all_position']
   $('#RightTable_Data').empty()
   for (var j = 0; j < all_position.length; j++) {
     if (all_position[j]['ticker'][0] == 'B') { col_1 = 'BN' } else if (all_position[j]['ticker'][0] == 'N') { col_1 = 'N' }
-    position_table.push([col_1,all_position[j]['ticker'].substr(all_position[j]['ticker'].length - 7, 5),all_position[j]['ticker'].substr(all_position[j]['ticker'].length - 2, 2),parseFloat(all_position[j]['lastPrice']).toFixed(2),all_position[j]['netQuantity'],parseFloat(all_position[j]['sell_avg']).toFixed(2), parseFloat(all_position[j]['pnl']).toFixed(2)])
+    position_table.push([col_1, all_position[j]['ticker'].substr(all_position[j]['ticker'].length - 7, 5), all_position[j]['ticker'].substr(all_position[j]['ticker'].length - 2, 2), parseFloat(all_position[j]['lastPrice']).toFixed(2), all_position[j]['netQuantity'], parseFloat(all_position[j]['sell_avg']).toFixed(2), parseFloat(all_position[j]['pnl']).toFixed(2)])
   }
   if (counter_for_all_position_datatable == 0) {
     counter_for_all_position_datatable += 1
@@ -12,7 +12,7 @@ all_position_right_table = () => {
       data: position_table,
       "columnDefs": [{ targets: [0, 1, 2, 3, 4, 5, 6], className: 'dt-body-center' },
       ],
-      "fnRowCallback": function(nRow, aData) {
+      "fnRowCallback": function (nRow, aData) {
         if (aData[4] == 0) {
           $('td', nRow).css('background-color', '#dcdcdc');
         }
@@ -46,9 +46,9 @@ order_update_left_table = (param) => {
       for (var i = 0; i < order_update[len[j]].length; i++) {
         var text = order_update[len[j]][i][1]
         index = text.indexOf('\n') + 1
-        text = text.substr(index,text.length)
+        text = text.substr(index, text.length)
         text = text.replace(/\n/g, '&nbsp;&nbsp;&nbsp;&nbsp;')
-        order_updates.push([len[j],moment(order_update[len[j]][i][0] * 1000).format('h:mm:ss'),text])
+        order_updates.push([len[j], moment(order_update[len[j]][i][0] * 1000).format('HH:mm:ss'), text])
       }
     }
     if (counter_for_order_update_datatable == 0) {
@@ -61,6 +61,7 @@ order_update_left_table = (param) => {
         paging: false,
         info: false,
         ordering: true,
+        order: [[1, 'desc']],
         searching: true,
       });
     }
@@ -72,9 +73,9 @@ order_update_left_table = (param) => {
     for (var j = 0; j < order_update.length; j++) {
       var text = order_update[j][1]
       index = text.indexOf('\n') + 1
-      text = text.substr(index,text.length)
+      text = text.substr(index, text.length)
       text = text.replace(/\n/g, '&nbsp;&nbsp;&nbsp;&nbsp;')
-      order_updates.push([param,moment(order_update[j][0] * 1000).format('h:mm:ss'),text])
+      order_updates.push([param, moment(order_update[j][0] * 1000).format('HH:mm:ss'), text])
     }
     if (counter_for_order_update_datatable == 0) {
       counter_for_order_update_datatable += 1
@@ -86,6 +87,7 @@ order_update_left_table = (param) => {
         paging: false,
         info: false,
         ordering: true,
+        order: [[1, 'desc']],
         searching: true,
       });
     }
@@ -95,7 +97,7 @@ order_update_left_table = (param) => {
 log_update_left_table = (param) => {
   $("#logDatatable_1").DataTable().destroy()
   counter_for_log_update_datatable = 0
-  log_table =[]
+  log_table = []
   if (param == 'ALL') {
     console.log('u r inside all')
     log_update = API_data['log_update']
@@ -106,7 +108,7 @@ log_update_left_table = (param) => {
         var text = log_update[len[j]][i][1]
         text = text.substr(13, text.length)
         text = text.replace(/\n/g, '&nbsp;&nbsp;&nbsp;&nbsp;')
-        log_table.push([len[j],moment(log_update[len[j]][i][0] * 1000).format('h:mm:ss'),text])
+        log_table.push([len[j], moment(log_update[len[j]][i][0] * 1000).format('HH:mm:ss'), text])
       }
     }
     if (counter_for_log_update_datatable == 0) {
@@ -119,6 +121,7 @@ log_update_left_table = (param) => {
         paging: false,
         info: false,
         ordering: true,
+        order: [[1, 'desc']],
         searching: true,
       });
     }
@@ -130,7 +133,7 @@ log_update_left_table = (param) => {
       var text = log_updates[j][1]
       text = text.substr(13, text.length)
       text = text.replace(/\n/g, '&nbsp;&nbsp;&nbsp;&nbsp;')
-      log_table.push([param,moment(log_updates[j][0] * 1000).format('h:mm:ss'),text])
+      log_table.push([param, moment(log_updates[j][0] * 1000).format('HH:mm:ss'), text])
     }
     if (counter_for_log_update_datatable == 0) {
       counter_for_log_update_datatable += 1
@@ -142,6 +145,7 @@ log_update_left_table = (param) => {
         paging: false,
         info: false,
         ordering: true,
+        order: [[1, 'desc']],
         searching: true,
       });
     }
@@ -152,13 +156,15 @@ $(document).ready(function () {
 
   $.ajaxSetup({ async: false }); // to stop async
 
+  console.log = function () { };
+
   root = 'https://stats.tradingcafeindia.in'
   route = '/api/fetch1'
 
-  time_API = 10000000
-  time_position_table = 500000
-  time_update_table = 500000
-  time_chart = 1000000
+  time_API = 1000
+  time_position_table = 5000
+  time_update_table = 5000
+  time_chart = 10000
 
   $.get(root + route, function (data, status) {
     API_data = data
