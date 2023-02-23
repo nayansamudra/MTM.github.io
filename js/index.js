@@ -484,9 +484,14 @@ $(document).ready(function () {
       $('#switch').addClass('d-none')
     }
     else if ($(document).width() < 975) {
-
-      $('#Table_2_Column').show()
-      $('#ChartDatatable_container').hide()
+      if ($('#flexSwitchCheckChecked').is(":checked")) {
+        $('#Table_2_Column').show()
+        $('#ChartDatatable_container').hide()
+      }
+      else{
+        $('#ChartDatatable_container').show()
+        $('#Table_2_Column').hide()
+      }
       $('#switch').removeClass('d-none')
     }
   });
@@ -495,7 +500,7 @@ $(document).ready(function () {
 
   setInterval(() => {
     let Account_option = $('#Account_option').val()
-    // console.log(Account_option)
+    console.log(Account_option)
     if (Account_option == 'Account_no_1') {
       root = 'https://nayansamudra.github.io/MTM.github.io/response.txt'
 
@@ -696,4 +701,5 @@ $(document).ready(function () {
       addData_4(chart_1)
     }
   }, 10000);
+
 })
