@@ -81,6 +81,7 @@ select>option{
   #Table_2_Column{
     display: none;
     height: fit-content !important;
+    padding-left: 12px !important;
   }
   #Table_2_Column .contaniner{
     height: fit-content !important;
