@@ -10,7 +10,8 @@ all_position_right_table = () => {
     counter_for_all_position_datatable += 1
     $("#Righttable_all_position").DataTable({
       data: position_table,
-      "columnDefs": [{ targets: [0, 1, 2, 3, 4, 5, 6], className: 'dt-body-center' },
+      "columnDefs": [{ targets: [0, 1, 2, 3, 4, 5, 6], className: 'dt-body-center'},
+        { targets: [0, 1, 2], width: '1px' }
       ],
       "fnRowCallback": function (nRow, aData) {
         if (aData[4] == 0) {

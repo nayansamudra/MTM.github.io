@@ -137,6 +137,8 @@ select>option{
   }
 }
 
-th, td{
+#ChartDatatable_1 th, #ChartDatatable_1 td,
+#logDatatable_1 th, #logDatatable_1 td {
   width: auto !important
 }
+
