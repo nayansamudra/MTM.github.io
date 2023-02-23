@@ -174,6 +174,17 @@ $(document).ready(function () {
       log_update_left_table('All')
       all_position_right_table()
 
+      if ($('#flexSwitchCheckChecked').is(":checked")) {
+        $('#Table_2_Column').show()
+        $('#ChartDatatable_container').hide()
+      }
+      else {
+        $('#flexSwitchCheckChecked').prop('checked',true)
+        console.log('checked')
+        $('#Table_2_Column').show()
+        $('#ChartDatatable_container').hide()
+      }
+
       if (counter_for_order_update_dropdown == 0) {
         counter_for_order_update_dropdown += 1
         var table1 = document.getElementById('order_update_option')
@@ -251,6 +262,17 @@ $(document).ready(function () {
       order_update_left_table('All')
       log_update_left_table('All')
       all_position_right_table()
+
+      if ($('#flexSwitchCheckChecked').is(":checked")) {
+        $('#Table_2_Column').show()
+        $('#ChartDatatable_container').hide()
+      }
+      else {
+        $('#flexSwitchCheckChecked').prop('checked',true)
+        console.log('checked')
+        $('#Table_2_Column').show()
+        $('#ChartDatatable_container').hide()
+      }
 
       if (counter_for_order_update_dropdown == 0) {
         counter_for_order_update_dropdown += 1
@@ -501,6 +523,8 @@ $(document).ready(function () {
   setInterval(() => {
     let Account_option = $('#Account_option').val()
     console.log(Account_option)
+    let log_update_option = $('#log_update_option').val()
+    let order_update_option = $('#order_update_option').val()
     if (Account_option == 'Account_no_1') {
       root = 'https://nayansamudra.github.io/MTM.github.io/response.txt'
 
@@ -541,6 +565,32 @@ $(document).ready(function () {
         }
       }
 
+      if(document.getElementById('Radio_1').checked){
+        $('#order_update').show()
+        $('#log_update').hide()
+        var len = Object.keys(API_data['order_updates'])
+        for(var i=0;i<len.length;i++){
+          console.log('u r inside for loop')
+          if(order_update_option == len[i]){
+            console.log('u r inside for loop - IF statement')
+            $('#order_update_option').val(order_update_option)
+            order_update_left_table(order_update_option)
+            console.log(order_update_option +'- done')
+          }
+        }
+      }
+      else if(document.getElementById('Radio_2').checked){
+        $('#order_update').hide()
+        $('#log_update').show()
+        var len = Object.keys(API_data['log_update'])
+        for(var i=0;i<len.length;i++){
+          if(log_update_option == len[i]){
+            $('#log_update_option').val(log_update_option)
+            log_update_left_table(log_update_option)
+          }
+        }
+      }
+
       x_axis = []
       y_axis = []
 
@@ -568,6 +618,7 @@ $(document).ready(function () {
       else if (parseFloat($('#percentage_pnl').text()) < 0) {
         $('#percentage').attr('style', 'color:red')
       }
+
     }
     else if (Account_option == 'Account_no_2') {
       root = 'https://nayansamudra.github.io/MTM.github.io/response_1.txt'
@@ -606,6 +657,32 @@ $(document).ready(function () {
         for (var j = 0; j < len.length; j++) {
           var row = `<option id="${j}_log_update" value="${len[j]}">${len[j]}</option>`
           table1.innerHTML += row
+        }
+      }
+
+      if(document.getElementById('Radio_1').checked){
+        $('#order_update').show()
+        $('#log_update').hide()
+        var len = Object.keys(API_data['order_updates'])
+        for(var i=0;i<len.length;i++){
+          console.log('u r inside for loop')
+          if(order_update_option == len[i]){
+            console.log('u r inside for loop - IF statement')
+            $('#order_update_option').val(order_update_option)
+            order_update_left_table(order_update_option)
+            console.log(order_update_option +'- done')
+          }
+        }
+      }
+      else if(document.getElementById('Radio_2').checked){
+        $('#order_update').hide()
+        $('#log_update').show()
+        var len = Object.keys(API_data['log_update'])
+        for(var i=0;i<len.length;i++){
+          if(log_update_option == len[i]){
+            $('#log_update_option').val(log_update_option)
+            log_update_left_table(log_update_option)
+          }
         }
       }
 
