@@ -136,3 +136,7 @@ select>option{
     font-size: 12px !important;
   }
 }
+
+th, td{
+  width: auto !important
+}
