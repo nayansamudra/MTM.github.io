@@ -10,7 +10,9 @@ all_position_right_table = () => {
     counter_for_all_position_datatable += 1
     $("#Righttable_all_position").DataTable({
       data: position_table,
-      "columnDefs": [{ targets: [0, 1, 2, 3, 4, 5, 6], className: 'dt-body-center'},
+      "columnDefs": [{ targets: [0, 1, 2,], className: 'dt-body-start'},
+        { targets: [4], className: 'dt-body-center'},
+        { targets: [3, 5, 6], className: 'dt-body-right'},
         { targets: [0, 1, 2], width: '1px' }
       ],
       "fnRowCallback": function (nRow, aData) {
@@ -31,6 +33,7 @@ all_position_right_table = () => {
       ordering: true,
       order: [[1, 'asc']],
       searching: true,
+      "dom": '<"pull-left"f><"pull-right"l>tip'
     });
   }
 }
@@ -64,6 +67,7 @@ order_update_left_table = (param) => {
         ordering: true,
         order: [[1, 'desc']],
         searching: true,
+        "dom": '<"pull-left"f><"pull-right"l>tip'
       });
     }
   }
@@ -90,6 +94,7 @@ order_update_left_table = (param) => {
         ordering: true,
         order: [[1, 'desc']],
         searching: true,
+        "dom": '<"pull-left"f><"pull-right"l>tip'
       });
     }
   }
@@ -124,6 +129,7 @@ log_update_left_table = (param) => {
         ordering: true,
         order: [[1, 'desc']],
         searching: true,
+        "dom": '<"pull-left"f><"pull-right"l>tip'
       });
     }
   }
@@ -148,6 +154,7 @@ log_update_left_table = (param) => {
         ordering: true,
         order: [[1, 'desc']],
         searching: true,
+        "dom": '<"pull-left"f><"pull-right"l>tip'
       });
     }
   }
@@ -422,6 +429,8 @@ $(document).ready(function () {
 
   const ctx = document.getElementById('chart');
 
+  
+
   chart_1 = new Chart(ctx, {
     type: 'line',
     data: {
@@ -439,6 +448,8 @@ $(document).ready(function () {
       }]
     },
     options: {
+      responsive: true,
+      maintainAspectRatio: false,
       scales: {
         y: {
           beginAtZero: true
