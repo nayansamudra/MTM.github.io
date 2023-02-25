@@ -18,13 +18,16 @@
 </head>
 
 <body style="overflow-x: hidden !important;">
-    <div class="pe-5 pt-1" style="width: 100%;" id="Top_Bar">
+    <div class="pt-1" style="width: 100%;" id="Top_Bar">
         <div class="row justify-content-start mx-2 mb-2">
-            <div class="col-auto bg-color rounded p-0"><b>Account&nbsp;</b>
+            <div class="col-auto bg-color rounded p-0 mt-2"><b>Account&nbsp;</b>
                 <select class="px-0 bg-faint rounded" id="Account_option">
                     <option id="1st_dropdown_value" value="Account_no_1">Account 1</option>
                     <option id="2nd_dropdown_value" value="Account_no_2">Account 2</option>
                 </select>
+            </div>
+            <div class="col-auto bg-color rounded p-0 mt-2 ms-2"><b>Date:&nbsp;</b>
+                <select class="px-0 bg-faint rounded" id="Date_option"></select>
             </div>
         </div>
         <div class="row d-none justify-content-start mx-2 mb-2" id="switch">
@@ -76,6 +79,9 @@
                         <div class="col-auto">
                             <input class="form-check-input" type="radio" id="Radio_2" name="update_radio_button" value="Log_Update">&nbsp;&nbsp;Log Update
                         </div>
+                        <div class="col-auto">
+                            <input class="form-check-input" type="radio" id="Radio_3" name="update_radio_button" value="Strategy">&nbsp;&nbsp;Strategy
+                        </div>
                     </div>
                     <div class="row" id="order_update" style="display: block;">
                         <div class="col-auto bg-color rounded p-0 mb-4">
@@ -117,10 +123,23 @@
                             </table>
                         </div>
                     </div>
+                    <div class="row" id="Strategy" style="display: none">
+                        <div id="strategyTable" style="display:block;height: 50vh !important;overflow-y: auto;margin-bottom: 15px;">
+                            <table id="strategyTable_1" class="row-border" style="font-size:14px">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Name</th>
+                                        <th class="text-center">MTM</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="strategy_Table_Data"></tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-6 ps-4" id="Table_2_Column">
-                <div class="contaniner">
+                <div class="contaniner mt-4"> <!-- <div class="container mt-4">-->
                     <div class="row">
                         <div id="Righttable"> 
                             <div class="text-center my-3"><b>All Position</b></div>

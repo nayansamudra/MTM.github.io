@@ -8,12 +8,12 @@ all_position_right_table = () => {
   }
   if (counter_for_all_position_datatable == 0) {
     counter_for_all_position_datatable += 1
-    $("#Righttable_all_position").DataTable({
+    datatable = $("#Righttable_all_position").DataTable({
       data: position_table,
-      "columnDefs": [{ targets: [0, 1, 2,], className: 'dt-body-start'},
-        { targets: [4], className: 'dt-body-center'},
-        { targets: [3, 5, 6], className: 'dt-body-right'},
-        { targets: [0, 1, 2], width: '1px' }
+      "columnDefs": [{ targets: [0, 1, 2,], className: 'dt-body-start' },
+      { targets: [4], className: 'dt-body-center' },
+      { targets: [3, 5, 6], className: 'dt-body-right' },
+      { targets: [0, 1, 2], width: '1px' }
       ],
       "fnRowCallback": function (nRow, aData) {
         if (aData[4] == 0) {
@@ -36,11 +36,15 @@ all_position_right_table = () => {
       "dom": '<"pull-left"f><"pull-right"l>tip'
     });
   }
+  else if (counter_for_all_position_datatable > 0) {
+    console.log("Data is updating")
+    datatable.clear();
+    datatable.rows.add(position_table);
+    datatable.draw();
+  }
 }
 
 order_update_left_table = (param) => {
-  $("#ChartDatatable_1").DataTable().destroy()
-  counter_for_order_update_datatable = 0
   order_updates = []
   if (param == 'ALL') {
     order_update = API_data['order_updates']
@@ -55,25 +59,9 @@ order_update_left_table = (param) => {
         order_updates.push([len[j], moment(order_update[len[j]][i][0] * 1000).format('HH:mm:ss'), text])
       }
     }
-    if (counter_for_order_update_datatable == 0) {
-      counter_for_order_update_datatable += 1
-      $("#ChartDatatable_1").DataTable({
-        data: order_updates,
-        "columnDefs": [{ targets: [0, 1, 2], className: 'dt-body-start' },
-        ],
-        "autoWidth": false,
-        paging: false,
-        info: false,
-        ordering: true,
-        order: [[1, 'desc']],
-        searching: true,
-        "dom": '<"pull-left"f><"pull-right"l>tip'
-      });
-    }
   }
   else {
     order_update = API_data['order_updates'][param]
-
     $('#order_updates_Data').empty()
     for (var j = 0; j < order_update.length; j++) {
       var text = order_update[j][1]
@@ -82,27 +70,31 @@ order_update_left_table = (param) => {
       text = text.replace(/\n/g, '&nbsp;&nbsp;&nbsp;&nbsp;')
       order_updates.push([param, moment(order_update[j][0] * 1000).format('HH:mm:ss'), text])
     }
-    if (counter_for_order_update_datatable == 0) {
-      counter_for_order_update_datatable += 1
-      $("#ChartDatatable_1").DataTable({
-        data: order_updates,
-        "columnDefs": [{ targets: [0, 1, 2], className: 'dt-body-start' },
-        ],
-        "autoWidth": false,
-        paging: false,
-        info: false,
-        ordering: true,
-        order: [[1, 'desc']],
-        searching: true,
-        "dom": '<"pull-left"f><"pull-right"l>tip'
-      });
-    }
+  }
+
+  if (counter_for_order_update_datatable == 0) {
+    counter_for_order_update_datatable += 1
+    datatable_1 = $("#ChartDatatable_1").DataTable({
+      data: order_updates,
+      "columnDefs": [{ targets: [0, 1, 2], className: 'dt-body-start' },
+      ],
+      "autoWidth": false,
+      paging: false,
+      info: false,
+      ordering: true,
+      order: [[1, 'desc']],
+      searching: true,
+      "dom": '<"pull-left"f><"pull-right"l>tip'
+    });
+  }
+  else if (counter_for_order_update_datatable > 0) {
+    datatable_1.clear();
+    datatable_1.rows.add(order_updates);
+    datatable_1.draw();
   }
 }
 
 log_update_left_table = (param) => {
-  $("#logDatatable_1").DataTable().destroy()
-  counter_for_log_update_datatable = 0
   log_table = []
   if (param == 'ALL') {
     console.log('u r inside all')
@@ -117,21 +109,6 @@ log_update_left_table = (param) => {
         log_table.push([len[j], moment(log_update[len[j]][i][0] * 1000).format('HH:mm:ss'), text])
       }
     }
-    if (counter_for_log_update_datatable == 0) {
-      counter_for_log_update_datatable += 1
-      $("#logDatatable_1").DataTable({
-        data: log_table,
-        "columnDefs": [{ targets: [0, 1, 2], className: 'dt-body-start' },
-        ],
-        "autoWidth": false,
-        paging: false,
-        info: false,
-        ordering: true,
-        order: [[1, 'desc']],
-        searching: true,
-        "dom": '<"pull-left"f><"pull-right"l>tip'
-      });
-    }
   }
   else {
     log_updates = API_data['log_update'][param]
@@ -142,21 +119,68 @@ log_update_left_table = (param) => {
       text = text.replace(/\n/g, '&nbsp;&nbsp;&nbsp;&nbsp;')
       log_table.push([param, moment(log_updates[j][0] * 1000).format('HH:mm:ss'), text])
     }
-    if (counter_for_log_update_datatable == 0) {
-      counter_for_log_update_datatable += 1
-      $("#logDatatable_1").DataTable({
-        data: log_table,
-        "columnDefs": [{ targets: [0, 1, 2], className: 'dt-body-start' },
-        ],
-        "autoWidth": false,
-        paging: false,
-        info: false,
-        ordering: true,
-        order: [[1, 'desc']],
-        searching: true,
-        "dom": '<"pull-left"f><"pull-right"l>tip'
-      });
-    }
+  }
+
+  if (counter_for_log_update_datatable == 0) {
+    counter_for_log_update_datatable += 1
+    datatable_2 = $("#logDatatable_1").DataTable({
+      data: log_table,
+      "columnDefs": [{ targets: [0, 1, 2], className: 'dt-body-start' },
+      ],
+      "autoWidth": false,
+      paging: false,
+      info: false,
+      ordering: true,
+      order: [[1, 'desc']],
+      searching: true,
+      "dom": '<"pull-left"f><"pull-right"l>tip'
+    });
+  }
+  else if (counter_for_log_update_datatable > 0) {
+    datatable_2.clear();
+    datatable_2.rows.add(log_table);
+    datatable_2.draw();
+  }
+}
+
+startegy_table_1 = () => {
+  startegy_table = []
+  strategy = API_data['strat']
+  name_key = Object.keys(strategy)
+  mtm_value = Object.values(strategy)
+  $('#strategy_Table_Data').empty()
+  for (var j = 0; j < name_key.length; j++) {
+    startegy_table.push([name_key[j], parseFloat(mtm_value[j])])
+  }
+  if (counter_for_startegy_table == 0) {
+    counter_for_startegy_table += 1
+    console.log('u entered in if part')
+    datatable_4 = $("#strategyTable_1").DataTable({
+      data: startegy_table,
+      "columnDefs": [{ targets: [0], className: 'dt-body-center' },
+      { targets: [1], className: 'dt-body-right' },
+      ],
+      "fnRowCallback": function (nRow, aData) {
+        if (aData[1] > 0) {
+          $('td:eq(1)', nRow).html('<span style=color:green>' + aData[1] + '</span>');
+        }
+        else {
+          $('td:eq(1)', nRow).html('<span style=color:red>' + aData[1] + '</span>');
+        }
+      },
+      "autoWidth": false,
+      paging: false,
+      info: false,
+      ordering: true,
+      searching: true,
+      "dom": '<"pull-left"f><"pull-right"l>tip'
+    });
+  }
+  else if (counter_for_all_position_datatable > 0) {
+    console.log("Data is updating")
+    datatable_4.clear();
+    datatable_4.rows.add(startegy_table);
+    datatable_4.draw();
   }
 }
 
@@ -168,11 +192,12 @@ $(document).ready(function () {
 
   root = 'https://stats.tradingcafeindia.in'
   route = '/api/fetch1'
+  route_hist_list = '/api/hist_list'
 
-  time_API = 1000
-  time_position_table = 5000
-  time_update_table = 5000
-  time_chart = 10000
+  time_API = 1000000
+  time_position_table = 5000000
+  time_update_table = 5000000
+  time_chart = 10000000
 
   $.get(root + route, function (data, status) {
     API_data = data
@@ -181,8 +206,14 @@ $(document).ready(function () {
     console.log('Error: ' + response);
   })
 
-  counter_for_log_update_dropdown = counter_for_order_update_dropdown = 0
-  counter_for_log_update_datatable = counter_for_order_update_datatable = counter_for_all_position_datatable = 0
+  $.get(root + route_hist_list, function (data, status) {
+    Hist_List = data
+  }).fail(function (response) {
+    console.log('Error: ' + response);
+  })
+
+  counter_for_log_update_dropdown = counter_for_order_update_dropdown = counter_for_date_dropdown = 0
+  counter_for_log_update_datatable = counter_for_order_update_datatable = counter_for_all_position_datatable = counter_for_startegy_table = 0
   counter_for_log_update_function_call = counter_for_order_update_function_call = 0
 
   all_position_right_table()
@@ -209,24 +240,26 @@ $(document).ready(function () {
     }
   }
 
+  if (counter_for_date_dropdown == 0) {
+    counter_for_date_dropdown += 1
+    var table1 = document.getElementById('Date_option')
+    for (var j = 0; j < Hist_List.length; j++) {
+      var row = `<option id="${j}_log_update" value="${moment(Hist_List[j] * 1000).format('DD-MM-YYYY')}">${moment(Hist_List[j] * 1000).format('DD-MM-YYYY')}</option>`
+      table1.innerHTML += row
+    }
+  }
+
   $('#Account_option').change(() => {
     let Account_option = $('#Account_option').val()
     if (Account_option == 'Account_no_1') {
       route = '/api/fetch1'
       $.get(root + route, function (data, status) {
         API_data = data
-        console.log(API_data)
       }).fail(function (response) {
         console.log('Error: ' + response);
       })
 
-      counter_for_all_position_datatable = 0
-      counter_for_log_update_dropdown = counter_for_order_update_dropdown = 0
-
-      $("#Righttable_all_position").DataTable().destroy()
-
       order_update_left_table('ALL')
-      log_update_left_table('ALL')
       all_position_right_table()
 
       if ($('#flexSwitchCheckChecked').is(":checked")) {
@@ -238,27 +271,6 @@ $(document).ready(function () {
         console.log('checked')
         $('#Table_2_Column').show()
         $('#ChartDatatable_container').hide()
-      }
-
-      if (counter_for_order_update_dropdown == 0) {
-        counter_for_order_update_dropdown += 1
-        var table1 = document.getElementById('order_update_option')
-        var len = Object.keys(API_data['order_updates'])
-        table1.innerHTML += row
-        for (var j = 0; j < len.length; j++) {
-          var row = `<option id="${j}_order_update" value="${len[j]}">${len[j]}</option>`
-          table1.innerHTML += row
-        }
-      }
-
-      if (counter_for_log_update_dropdown == 0) {
-        counter_for_log_update_dropdown += 1
-        var table1 = document.getElementById('log_update_option')
-        var len = Object.keys(API_data['log_update'])
-        for (var j = 0; j < len.length; j++) {
-          var row = `<option id="${j}_log_update" value="${len[j]}">${len[j]}</option>`
-          table1.innerHTML += row
-        }
       }
 
       x_axis = []
@@ -303,18 +315,11 @@ $(document).ready(function () {
       route = '/api/fetch2'
       $.get(root + route, function (data, status) {
         API_data = data
-        console.log(API_data)
       }).fail(function (response) {
         console.log('Error: ' + response);
       })
 
-      counter_for_all_position_datatable = 0
-      counter_for_log_update_dropdown = counter_for_order_update_dropdown = 0
-
-      $("#Righttable_all_position").DataTable().destroy()
-
       order_update_left_table('ALL')
-      log_update_left_table('ALL')
       all_position_right_table()
 
       if ($('#flexSwitchCheckChecked').is(":checked")) {
@@ -326,27 +331,6 @@ $(document).ready(function () {
         console.log('checked')
         $('#Table_2_Column').show()
         $('#ChartDatatable_container').hide()
-      }
-
-      if (counter_for_order_update_dropdown == 0) {
-        counter_for_order_update_dropdown += 1
-        var table1 = document.getElementById('order_update_option')
-        var len = Object.keys(API_data['order_updates'])
-        table1.innerHTML += row
-        for (var j = 0; j < len.length; j++) {
-          var row = `<option id="${j}_order_update" value="${len[j]}">${len[j]}</option>`
-          table1.innerHTML += row
-        }
-      }
-
-      if (counter_for_log_update_dropdown == 0) {
-        counter_for_log_update_dropdown += 1
-        var table1 = document.getElementById('log_update_option')
-        var len = Object.keys(API_data['log_update'])
-        for (var j = 0; j < len.length; j++) {
-          var row = `<option id="${j}_log_update" value="${len[j]}">${len[j]}</option>`
-          table1.innerHTML += row
-        }
       }
 
       x_axis = []
@@ -392,15 +376,22 @@ $(document).ready(function () {
   $('#Radio_1').click(() => {
     $('#order_update').show()
     $('#log_update').hide()
+    $('#Strategy').hide()
     order_update_left_table('ALL')
     $('#order_update_option').val('ALL')
   })
   $('#Radio_2').click(() => {
-    console.log('u click on radio button')
     $('#order_update').hide()
     $('#log_update').show()
+    $('#Strategy').hide()
     log_update_left_table('ALL')
     $('#log_update_option').val('ALL')
+  })
+  $('#Radio_3').click(() => {
+    $('#order_update').hide()
+    $('#log_update').hide()
+    $('#Strategy').show()
+    startegy_table_1()
   })
 
 
@@ -428,8 +419,6 @@ $(document).ready(function () {
   $('#Live_MTM').text(live_mtm)
 
   const ctx = document.getElementById('chart');
-
-  
 
   chart_1 = new Chart(ctx, {
     type: 'line',
@@ -498,12 +487,10 @@ $(document).ready(function () {
 
   $('#switch').click(() => {
     if ($('#flexSwitchCheckChecked').is(":checked")) {
-
       $('#Table_2_Column').show()
       $('#ChartDatatable_container').hide()
     }
     else {
-
       $('#Table_2_Column').hide()
       $('#ChartDatatable_container').show()
     }
@@ -516,7 +503,6 @@ $(document).ready(function () {
       route = '/api/fetch1'
       $.get(root + route, function (data, status) {
         API_data = data
-        console.log(API_data)
       }).fail(function (response) {
         console.log('Error: ' + response);
       })
@@ -525,7 +511,6 @@ $(document).ready(function () {
       route = '/api/fetch2'
       $.get(root + route, function (data, status) {
         API_data = data
-        console.log(API_data)
       }).fail(function (response) {
         console.log('Error: ' + response);
       })
@@ -575,8 +560,6 @@ $(document).ready(function () {
 
   // updating ALL POSITION TABLE after every 5 sec
   setInterval(() => {
-    counter_for_all_position_datatable = 0
-    $("#Righttable_all_position").DataTable().destroy()
     all_position_right_table()
   }, time_position_table);
 
@@ -585,55 +568,14 @@ $(document).ready(function () {
     let log_update_option = $('#log_update_option').val()
     let order_update_option = $('#order_update_option').val()
 
-    counter_for_log_update_dropdown = counter_for_order_update_dropdown = 0
-
-    if (counter_for_order_update_dropdown == 0) {
-      counter_for_order_update_dropdown += 1
-      var table1 = document.getElementById('order_update_option')
-      var len = Object.keys(API_data['order_updates'])
-      table1.innerHTML += row
-      for (var j = 0; j < len.length; j++) {
-        var row = `<option id="${j}_order_update" value="${len[j]}">${len[j]}</option>`
-        table1.innerHTML += row
-      }
-    }
-
-    if (counter_for_log_update_dropdown == 0) {
-      counter_for_log_update_dropdown += 1
-      var table1 = document.getElementById('log_update_option')
-      var len = Object.keys(API_data['log_update'])
-      for (var j = 0; j < len.length; j++) {
-        var row = `<option id="${j}_log_update" value="${len[j]}">${len[j]}</option>`
-        table1.innerHTML += row
-      }
-    }
-
     if (document.getElementById('Radio_1').checked) {
-      order_update_left_table('ALL')
-      $('#order_update').show()
-      $('#log_update').hide()
-      var len = Object.keys(API_data['order_updates'])
-      for (var i = 0; i < len.length; i++) {
-        console.log('u r inside for loop')
-        if (order_update_option == len[i]) {
-          console.log('u r inside for loop - IF statement')
-          $('#order_update_option').val(order_update_option)
-          order_update_left_table(order_update_option)
-          console.log(order_update_option + '- done')
-        }
-      }
+      order_update_left_table(order_update_option)
     }
     else if (document.getElementById('Radio_2').checked) {
-      log_update_left_table('ALL')
-      $('#order_update').hide()
-      $('#log_update').show()
-      var len = Object.keys(API_data['log_update'])
-      for (var i = 0; i < len.length; i++) {
-        if (log_update_option == len[i]) {
-          $('#log_update_option').val(log_update_option)
-          log_update_left_table(log_update_option)
-        }
-      }
+      log_update_left_table(log_update_option)
+    }
+    else if (document.getElementById('Radio_3').checked) {
+      startegy_table_1()
     }
   }, time_update_table);
 
